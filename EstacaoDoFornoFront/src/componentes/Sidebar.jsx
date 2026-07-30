@@ -14,7 +14,10 @@ function Sidebar() {
       .then((res) => res.json())
       .then((data) => {
         if (data && Array.isArray(data.dados)) {
-          setCategorias(data.dados);
+          const ordenadas = [...data.dados].sort((a, b) =>
+            a.descricao.localeCompare(b.descricao, 'pt-BR')
+          );
+          setCategorias(ordenadas);
         }
       })
       .catch((err) => console.error("Erro:", err));
